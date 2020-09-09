@@ -63,6 +63,10 @@ e.g /etc/fstab will have something like this added for hfsplus
 
 
 
+# Notes
+- docker-compose might not start locally if you have file sharing active, due to smb port 445 being in use
+- you will need to log out and log back into ssh/terminal session after installing docker for permissions to apply
+
 
 
 # Once this is all done
@@ -70,3 +74,5 @@ e.g /etc/fstab will have something like this added for hfsplus
 - go to
   - http://[IPADDRESS]:32400 to access plex (media server)
   - http://[IPADDRESS]:8080 to access deluge (torrent)
+
+ 
