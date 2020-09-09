@@ -11,8 +11,8 @@ services:
             - PLEX_CLAIM= #optional
         volumes:
             - ./volumes/plex/library:/config
-            - ./volumes/plex/tvseries:/tv
-            - ./volumes/plex/movies:/movies
+            - downloads:/tv
+            - downloads:/movies
         restart: unless-stopped
         ports:
             - "32400:32400"
@@ -38,7 +38,7 @@ services:
             - DELUGE_LOGLEVEL=error #optional
         volumes:
             - ./volumes/deluge/config:/config
-            - ./volumes/downloads:/downloads
+            - downloads:/downloads
         restart: unless-stopped
         ports:
             - "8080:80"
@@ -49,7 +49,7 @@ services:
         hostname: samba
         image: sixeyed/samba
         volumes:
-            - ./volumes/downloads/:/downloads
+            - downloads:/downloads
         ports:
             - "139:139"
             - "8081:445"
@@ -60,4 +60,4 @@ services:
         network_mode: host
 
 volumes:
-    external-drive:       
+    downloads:       
