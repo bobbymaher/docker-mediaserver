@@ -58,3 +58,6 @@ services:
         command: samba.sh -s "downloads;/downloads;yes;no;yes;all" 
         restart: unless-stopped
         network_mode: host
+
+volumes:
+    external-drive:       
