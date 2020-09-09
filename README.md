@@ -6,11 +6,11 @@ quickstart for raspberry pi
 
     curl -sSL https://get.docker.com | sh
     sudo usermod -aG docker pi
-    sudo apt-get install -y libffi-dev libssl-dev -y
-    sudo apt-get install -y python3 python3-pip -y
+    sudo apt-get install -y libffi-dev libssl-dev
+    sudo apt-get install -y python3 python3-pip
     sudo apt-get remove python-configparser -y
     sudo pip3 -v install docker-compose
-    sudo apt-get install vim git -y
+    sudo apt-get install -y vim git
     git clone https://github.com/bobbymaher/docker-mediaserver.git
 
 
@@ -46,23 +46,27 @@ You can modify the fstab file to define the location where the storage device wi
 
 Get the UUID of the disk partition:
 
-    sudo blkid
+    sudo blkid /dev/sda1
 Find the disk partition from the list and note the UUID. For example, 5C24-1453.
 Open the fstab file using a command line editor such as nano:
 
     sudo vim /etc/fstab
 Add the following line in the fstab file:
 
-UUID=5C24-1453 /mnt/mydisk FSTYPE defaults,auto,users,rw,nofail 0 0
-Replace FSTYPE with the type of your file system, you can check using
-
-    sudo blkid /dev/sda1
 
 If the filesystem type is FAT or NTFS, add ,umask=000 immediately after nofail - this will allow all users full read/write access to every file on the storage device.
 
 
-
-
-e.g /etc/fstab will have something like this added
+e.g /etc/fstab will have something like this added for hfsplus
 
     UUID=a39f91b1-b568-3db6-81f7-972e279a8d46 /media/time_machine hfsplus force,auto,uid=1000,users,rw 0 0
+
+
+
+
+
+# Once this is all done
+- run docker-compose up in the ./docker-mediaserver directory
+- go to
+  - http://[IPADDRESS]:32400 to access plex (media server)
+  - http://[IPADDRESS]:8080 to access deluge (torrent)
