@@ -1,5 +1,9 @@
 version: '3.4'
 
 volumes:
-  downloads: /mnt/external1/downloads
+  downloads:
+    driver_opts:
+      type: none
+      device: /mnt/external1/downloads
+      o: bind
 
