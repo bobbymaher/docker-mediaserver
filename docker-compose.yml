@@ -11,8 +11,7 @@ services:
             - PLEX_CLAIM= #optional
         volumes:
             - ./volumes/plex/library:/config
-            - downloads:/tv
-            - downloads:/movies
+            - downloads:/media
         restart: unless-stopped
         ports:
             - "32400:32400"
@@ -52,7 +51,7 @@ services:
             - downloads:/downloads
         ports:
             - "139:139"
-            - "445:445"
+            - "4445:445"
             - "137:137/udp"
             - "138:138/udp"
         command: samba.sh -s "downloads;/downloads;yes;no;yes;all" 
@@ -60,4 +59,10 @@ services:
         network_mode: host
 
 volumes:
-    downloads:       
+    downloads:
+
+
+networks:
+    default:
+        external:
+        name: mediaserver-net

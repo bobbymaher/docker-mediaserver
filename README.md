@@ -66,7 +66,7 @@ e.g /etc/fstab will have something like this added for hfsplus
 # Notes
 - docker-compose might not start locally if you have file sharing active, due to smb port 445 being in use
 - you will need to log out and log back into ssh/terminal session after installing docker for permissions to apply
-
+- if you get errors about "UnixHTTPConnectionPool(host='localhost', port=None): Read timed out." when starting docker, increase the values in .env
 
 
 # Once this is all done
