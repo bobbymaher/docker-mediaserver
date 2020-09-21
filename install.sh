@@ -8,6 +8,9 @@
     sudo pip3 -v install docker-compose
     sudo apt-get install -y vim git
     git clone https://github.com/bobbymaher/docker-mediaserver.git
+    cd docker-mediaserver && mkdir handbrake && cd handbrake
+    git clone https://github.com/jlesage/docker-handbrake.git .
+    
 
 
 sudo mkdir /mnt/external1

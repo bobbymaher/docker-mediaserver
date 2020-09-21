@@ -59,7 +59,7 @@ services:
         network_mode: host
 
     handbrake:
-        image: jlesage/handbrake
+        build: handbrake
         container_name: handbrake
         ports:
             - '5800:5800'
