@@ -18,10 +18,3 @@ volumes:
       type: none
       device: /mnt/external1/downloads/DownloadInProgress
       o: bind
-
-  convert:
-    driver_opts:
-      type: none
-      device: /mnt/external1/downloads/convert
-      o: bind
-

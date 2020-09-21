@@ -58,22 +58,8 @@ services:
         restart: unless-stopped
         network_mode: host
 
-    handbrake:
-        build: handbrake
-        container_name: handbrake
-        ports:
-            - '5800:5800'
-        volumes:
-            - './volumes/handbrake/config:/config:rw'
-            - 'external_hdd:/storage:rw'
-            - 'convert:/watch:rw'
-            - 'downloads:/output:rw'
-        environment:
-            - AUTOMATED_CONVERSION_KEEP_SOURCE=0
 
 volumes:
     external_hdd:
     downloads:
     downloading:
-    convert:
-           
