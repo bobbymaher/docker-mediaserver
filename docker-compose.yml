@@ -10,8 +10,8 @@ services:
             - UMASK_SET=022 #optional
             - PLEX_CLAIM= #optional
         volumes:
-            - ./volumes/plex/library:/config
-            - downloads:/media
+            - ./volumes/plex/library:/config:rw
+            - downloads:/media:rw
         restart: unless-stopped
         ports:
             - "32400:32400"
@@ -36,8 +36,8 @@ services:
             - UMASK_SET=022 #optional
             - DELUGE_LOGLEVEL=error #optional
         volumes:
-            - ./volumes/deluge/config:/config
-            - downloads:/downloads
+            - ./volumes/deluge/config:/config:rw
+            - downloads:/downloads:rw
         restart: unless-stopped
         ports:
             - "8080:80"
@@ -48,7 +48,7 @@ services:
         hostname: samba
         image: sixeyed/samba
         volumes:
-            - downloads:/downloads
+            - downloads:/downloads:rw
         ports:
             - "139:139"
             - "4445:445"
@@ -57,6 +57,19 @@ services:
         command: samba.sh -s "downloads;/downloads;yes;no;yes;all" 
         restart: unless-stopped
         network_mode: host
+
+    handbrake:
+        image: jlesage/handbrake
+        container_name: handbrake
+        ports:
+            - '5800:5800'
+        volumes:
+            - './volumes/handbrake/config:/config:rw'
+            - 'external_hdd:/storage:rw'
+            - 'convert:/watch:rw'
+            - 'downloads:/output:rw'
+        environment:
+            - AUTOMATED_CONVERSION_KEEP_SOURCE=0
 
 volumes:
     downloads:       
