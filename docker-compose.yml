@@ -72,4 +72,8 @@ services:
             - AUTOMATED_CONVERSION_KEEP_SOURCE=0
 
 volumes:
-    downloads:       
+    external_hdd:
+    downloads:
+    downloading:
+    convert:
+           
