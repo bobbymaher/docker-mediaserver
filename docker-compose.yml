@@ -10,8 +10,8 @@ services:
             - UMASK_SET=022 #optional
             - PLEX_CLAIM= #optional
         volumes:
-            - ./volumes/plex/library:/config
-            - downloads:/media
+            - ./volumes/plex/library:/config:rw
+            - downloads:/media:rw
         restart: unless-stopped
         ports:
             - "32400:32400"
@@ -26,21 +26,25 @@ services:
             - "32469:32469"
   
 
-    deluge:
-        image: linuxserver/deluge
-        container_name: deluge
+    transmission:
+        image: linuxserver/transmission
+        container_name: transmission
         environment:
             - PUID=1000
             - PGID=1000
             - TZ=Europe/London
-            - UMASK_SET=022 #optional
-            - DELUGE_LOGLEVEL=error #optional
+            - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+            - USER=pi #optional
+            - PASS=raspberry #optional
         volumes:
-            - ./volumes/deluge/config:/config
+            - ./volumes/transmission/config:/config
             - downloads:/downloads
-        restart: unless-stopped
+            - ./volumes/transmission/watch:/watch
         ports:
-            - "8080:80"
+            - 9091:9091
+            - 51413:51413
+            - 51413:51413/udp
+        restart: unless-stopped
 
 
     samba:
@@ -48,7 +52,7 @@ services:
         hostname: samba
         image: sixeyed/samba
         volumes:
-            - downloads:/downloads
+            - downloads:/downloads:rw
         ports:
             - "139:139"
             - "4445:445"
@@ -58,11 +62,8 @@ services:
         restart: unless-stopped
         network_mode: host
 
+
 volumes:
+    external_hdd:
     downloads:
-
-
-networks:
-    default:
-        external:
-            name: mediaserver-net
+    downloading:

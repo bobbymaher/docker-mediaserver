@@ -1,9 +1,20 @@
 version: '3.4'
 
 volumes:
-  downloads:
+  external_hdd:
     driver_opts:
       type: none
       device: /mnt/external1/downloads
       o: bind
 
+  downloads:
+    driver_opts:
+      type: none
+      device: /mnt/external1/downloads/DownloadCompleted
+      o: bind
+
+  downloading:
+    driver_opts:
+      type: none
+      device: /mnt/external1/downloads/DownloadInProgress
+      o: bind
